@@ -15,13 +15,14 @@ from typing import Callable
 def get_file_extension(
     file: str
 ) -> str:
-    """_summary_
+    """
+    Extract file extension
 
     Args:
-        filename (str): _description_
+        filename (str): Location to the file
 
     Returns:
-        str: _description_
+        file_extension (str): File extension
     """
     file_extension = file.split('.')[-1]
     ic(file_extension)
@@ -32,13 +33,14 @@ def get_file_extension(
 def new_file_extension(
     format: str
 ) -> str:
-    """_summary_
+    """
+    Find extension to save the table
 
     Args:
-        filename (str): _description_
+        format (str): Format for generating the table
 
     Returns:
-        str: _description_
+        new_ext (str): New file extension
     """
     if format == "markdown":
         new_ext = "md"
@@ -59,10 +61,10 @@ def get_appropriate_read_function(
     Returns the appropriate pandas read function based on file extension.
 
     Args:
-        file_ext (str): _description_
+        file_ext (str): File extension
 
     Returns:
-        Callable: _description_
+        read_file_function (Callable): Appropriate function to call for reading the file
     """
     # Find function for reading the file
     if "csv" == file_ext:
@@ -80,13 +82,14 @@ def get_appropriate_read_function(
 def read_file(
     file: str
 ) -> pd.DataFrame:
-    """_summary_
+    """
+    Read file to a DataFrame
 
     Args:
-        file (str): _description_
+        file (str): File location
 
     Returns:
-        pd.DataFrame: _description_
+        dataframe (pd.DataFrame): DataFrame
     """
     file_extension = get_file_extension(file)
     func = get_appropriate_read_function(file_extension)
@@ -98,14 +101,15 @@ def read_file(
 def craft_table(
     dataframe: pd.DataFrame,
     format: str
-) -> Callable:
-    """_summary_
+) -> str:
+    """
+    Create the table in the desired format
 
     Args:
-        format (str): _description_
+        format (str): Format for the table
 
     Returns:
-        Callable: _description_
+        tabular (str): Table in string format
     """
     # Find appropriate function for saving in the wanted format
     if "markdown" == format:
@@ -123,15 +127,16 @@ def craft_table(
 
 def save_table(
     file: str,
-    data: pd.DataFrame,
+    data: str,
     format: str
 ):
-    """_summary_
+    """
+    Save the table in the desired format
 
     Args:
-        file (str): _description_
-        tab (str): _description_
-        format (str): _description_
+        file (str): Filename location
+        tab (str): Table in string format
+        format (str): Format to save the table
     """
     new_extension = new_file_extension(format)
     file_path = file.split(".")[0] + f'.{new_extension}'
