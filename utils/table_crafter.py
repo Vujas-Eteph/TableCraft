@@ -1,6 +1,5 @@
-"""Helper function for creating a table from
-csv, json, ... files and saving them to
-markdown, latex and other formats.
+"""
+Helper function for craft_table.py
 
 by Stephane Vujasinovic
 """
@@ -56,7 +55,28 @@ def new_file_extension(
     return new_ext
 
 
-def get_appropriate_read_function(
+def new_file_name(
+    file: str,
+    table_format: str
+) -> str:
+    """
+    Create new file name
+
+    Args:
+        file (str): _description_
+        table_format (str): _description_
+
+    Returns:
+        str: _description_
+    """
+    new_extension = new_file_extension(table_format)
+    new_file = file.split(".")[0] + f'.{new_extension}'
+    ic(new_file)
+
+    return new_file
+
+
+def read_function(
     file_ext: str
 ) -> Callable:
     """
@@ -68,7 +88,6 @@ def get_appropriate_read_function(
     Returns:
         read_file_function (Callable): Function
     """
-    # Find function for reading the file
     if "csv" == file_ext:
         read_file_function = pd.read_csv
     elif "json" == file_ext:
@@ -81,7 +100,7 @@ def get_appropriate_read_function(
     return read_file_function
 
 
-def file_to_dataframe(
+def convert_file_to_dataframe(
     file: str
 ) -> pd.DataFrame:
     """
@@ -94,12 +113,12 @@ def file_to_dataframe(
         pd.DataFrame: _description_
     """
     file_extension = get_file_extension(file)
-    func = get_appropriate_read_function(file_extension)
+    func = read_function(file_extension)
 
     return func(file)
 
 
-def dataframe_to_tabular(
+def convert_dataframe_to_table(
     dataframe: pd.DataFrame,
     table_format: str
 ) -> str:
@@ -140,31 +159,10 @@ def craft_table(
     Returns:
         tabular (str): Table in string format
     """
-    dataframe = file_to_dataframe(file)
-    table = dataframe_to_tabular(dataframe, table_format)
+    dataframe = convert_file_to_dataframe(file)
+    table = convert_dataframe_to_table(dataframe, table_format)
 
     return table
-
-
-def get_new_file_name(
-    file: str,
-    table_format: str
-) -> str:
-    """
-    Create new file name
-
-    Args:
-        file (str): _description_
-        table_format (str): _description_
-
-    Returns:
-        str: _description_
-    """
-    new_extension = new_file_extension(table_format)
-    new_file = file.split(".")[0] + f'.{new_extension}'
-    ic(new_file)
-
-    return new_file
 
 
 def save_table(
@@ -180,7 +178,7 @@ def save_table(
         tab (str): Table in string format
         table_format (str): Format to save the table
     """
-    new_file_path = get_new_file_name(file, table_format)
+    new_file_path = new_file_name(file, table_format)
     with open(new_file_path, 'w', encoding='utf-8') as f:
         f.write(table)
 

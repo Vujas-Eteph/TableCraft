@@ -2,7 +2,13 @@
 ## [Unreleased]
 
 ### Docs
+- updated README.md ([#2](https://github.com/Vujas-Eteph/TableCraft/issues/2))
+- Added informations on the README.md ([#2](https://github.com/Vujas-Eteph/TableCraft/issues/2))
+- Added a changelog.md file
 - Added change log
+
+### Feat
+- Added changelog
 
 
 <a name="v0.1.0"></a>
