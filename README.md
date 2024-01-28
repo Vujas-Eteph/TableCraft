@@ -1,5 +1,5 @@
 # TableCraft
-***Preamble:*** Minimal Toolkit for converting structural data from various formats such as CSV, JSON, and XML into table formats like Markdown and LaTeX.
+***Preamble:*** Minimaliste Toolkit for converting structural data from various formats such as CSV, JSON, and XML into table formats like Markdown and LaTeX.
 
 ### :zap: Quick use:
 ```console
