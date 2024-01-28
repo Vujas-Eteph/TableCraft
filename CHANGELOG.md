@@ -10,6 +10,9 @@
 ### Feat
 - Added changelog
 
+### Style
+- renaming and style of helper functions ([#1](https://github.com/Vujas-Eteph/TableCraft/issues/1))
+
 
 <a name="v0.1.0"></a>
 ## [v0.1.0] - 2024-01-27
